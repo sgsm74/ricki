@@ -25,7 +25,7 @@ class DioService extends HttpService {
       );
       return response;
     } catch (exp) {
-      print(exp);
+      //print(exp);
       rethrow;
     }
   }
