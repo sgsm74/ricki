@@ -1,4 +1,6 @@
+import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
+import 'package:ricki/core/utils/http_service.dart';
 import 'package:ricki/rickandmorty/data/datasources/remote_datasource.dart';
 import 'package:ricki/rickandmorty/data/repositories/repository_impl.dart';
 import 'package:ricki/rickandmorty/domain/respositories/repository.dart';
@@ -69,4 +71,20 @@ Future<void> init() async {
   //data source
   serviceLocator.registerLazySingleton<RemoteDataSource>(
       () => RemoteDataSourceImpl(httpService: serviceLocator()));
+
+  //http
+  serviceLocator.registerLazySingleton<HttpService>(() {
+    {
+      final dio = Dio(
+        BaseOptions(
+            // connectTimeout: 5000,
+            // receiveTimeout: 3000
+            ),
+      );
+
+      return DioService(
+        dio: dio,
+      );
+    }
+  });
 }
